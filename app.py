@@ -10,11 +10,16 @@ from simulation import (
 
 from fuzzy_logic import fuzzy_controller
 
-# Person 2: Performance Metrics
 from traffic_metrics import (
     calculate_metrics,
     compare_controllers,
     get_congestion_level
+)
+
+from visualization import (
+    create_comparison_graph,
+    create_waiting_time_graph,
+    create_queue_graph
 )
 
 
@@ -37,12 +42,12 @@ st.write(
 
 
 # --------------------------------------------------
-# SIDEBAR: SIMULATION SETTINGS
+# SIDEBAR - SIMULATION SETTINGS
 # --------------------------------------------------
 
 with st.sidebar:
 
-    st.header("Simulation Settings")
+    st.header("⚙️ Simulation Settings")
 
     minutes = st.slider(
         "Duration (minutes)",
@@ -74,7 +79,7 @@ with st.sidebar:
 # RUN SIMULATION
 # --------------------------------------------------
 
-if st.button("Run Simulation", type="primary"):
+if st.button("🚦 Run Simulation", type="primary"):
 
     seconds = minutes * 60
 
@@ -115,7 +120,9 @@ if st.button("Run Simulation", type="primary"):
 
 if "results" not in st.session_state:
 
-    st.info("Configure the simulation settings and click Run Simulation.")
+    st.info(
+        "Configure the simulation settings and click Run Simulation."
+    )
 
 else:
 
@@ -129,7 +136,7 @@ else:
 
 
     # --------------------------------------------------
-    # PERSON 2: CALCULATE PERFORMANCE METRICS
+    # CALCULATE PERFORMANCE METRICS
     # --------------------------------------------------
 
     fixed_summary = calculate_metrics(
@@ -146,18 +153,13 @@ else:
 
 
     # --------------------------------------------------
-    # PERSON 2: COMPARE BOTH CONTROLLERS
+    # COMPARE CONTROLLERS
     # --------------------------------------------------
 
     controller_comparison = compare_controllers(
         fixed_summary,
         fuzzy_summary
     )
-
-
-    # --------------------------------------------------
-    # PERSON 2: CONGESTION CLASSIFICATION
-    # --------------------------------------------------
 
     fixed_congestion = get_congestion_level(
         fixed_summary["average_queue_length"]
@@ -169,7 +171,7 @@ else:
 
 
     # --------------------------------------------------
-    # SECTION 1: PERFORMANCE OVERVIEW
+    # PERFORMANCE OVERVIEW
     # --------------------------------------------------
 
     st.divider()
@@ -197,7 +199,9 @@ else:
             fixed_summary["total_vehicles_passed"]
         )
 
-        st.info(f"Congestion Level: {fixed_congestion}")
+        st.info(
+            f"Congestion Level: {fixed_congestion}"
+        )
 
 
     with col2:
@@ -225,11 +229,13 @@ else:
             fuzzy_summary["total_vehicles_passed"]
         )
 
-        st.success(f"Congestion Level: {fuzzy_congestion}")
+        st.success(
+            f"Congestion Level: {fuzzy_congestion}"
+        )
 
 
     # --------------------------------------------------
-    # SECTION 2: PERCENTAGE IMPROVEMENT
+    # PERCENTAGE IMPROVEMENT
     # --------------------------------------------------
 
     st.divider()
@@ -244,7 +250,9 @@ else:
 
         improvement = values["improvement_percentage"]
 
-        st.write(f"Improvement: {improvement}%")
+        st.write(
+            f"Improvement: {improvement}%"
+        )
 
         if improvement > 0:
 
@@ -254,11 +262,13 @@ else:
 
         else:
 
-            st.info("No positive improvement over fixed-time control.")
+            st.info(
+                "No positive improvement over fixed-time control."
+            )
 
 
     # --------------------------------------------------
-    # SECTION 3: DETAILED COMPARISON TABLE
+    # DETAILED SIMULATION RESULTS
     # --------------------------------------------------
 
     st.divider()
@@ -280,7 +290,7 @@ else:
 
 
     # --------------------------------------------------
-    # SECTION 4: WAITING TIME COMPARISON
+    # WAITING TIME COMPARISON
     # --------------------------------------------------
 
     st.divider()
@@ -298,9 +308,7 @@ else:
     )
 
     ax.set_ylabel("Average Waiting Time (seconds)")
-
     ax.set_title("Average Waiting Time Comparison")
-
     ax.grid(axis="y", alpha=0.3)
 
     st.pyplot(fig)
@@ -309,7 +317,7 @@ else:
 
 
     # --------------------------------------------------
-    # SECTION 5: QUEUE LENGTH OVER TIME
+    # QUEUE LENGTH OVER TIME
     # --------------------------------------------------
 
     st.divider()
@@ -333,12 +341,15 @@ else:
 
     ax.set_xlabel("Time (minutes)")
 
-    ax.set_ylabel("Queue Length (15-second rolling average)")
+    ax.set_ylabel(
+        "Queue Length (15-second rolling average)"
+    )
 
-    ax.set_title("Fixed-Time vs Fuzzy Logic Traffic Queue")
+    ax.set_title(
+        "Fixed-Time vs Fuzzy Logic Traffic Queue"
+    )
 
     ax.legend()
-
     ax.grid(True, alpha=0.3)
 
     st.pyplot(fig)
@@ -347,7 +358,66 @@ else:
 
 
     # --------------------------------------------------
-    # SECTION 6: GREEN LIGHT DECISIONS
+    # PERSON 3 - ADDITIONAL VISUALIZATIONS
+    # --------------------------------------------------
+
+    st.divider()
+
+    st.header("📊 Additional Visualizations")
+
+    # Generate and save graphs
+
+    create_comparison_graph(
+        fixed_summary,
+        fuzzy_summary
+    )
+
+    create_waiting_time_graph(
+        fixed_summary["average_waiting_time"],
+        fuzzy_summary["average_waiting_time"]
+    )
+
+    create_queue_graph(
+        fixed_summary["average_queue_length"],
+        fuzzy_summary["average_queue_length"]
+    )
+
+
+    # Display comparison graph
+
+    st.subheader("Controller Performance Comparison")
+
+    st.image(
+        "results/controller_comparison.png",
+        use_container_width=True
+    )
+
+
+    # Display waiting time and queue graphs
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.subheader("Waiting Time Comparison")
+
+        st.image(
+            "results/waiting_time.png",
+            use_container_width=True
+        )
+
+    with col2:
+
+        st.subheader("Queue Length Comparison")
+
+        st.image(
+            "results/queue_comparison.png",
+            use_container_width=True
+        )
+
+
+    # --------------------------------------------------
+    # GREEN LIGHT DECISIONS
     # --------------------------------------------------
 
     st.divider()
@@ -376,7 +446,7 @@ else:
 
 
     # --------------------------------------------------
-    # SECTION 7: DOWNLOAD RESULTS
+    # DOWNLOAD RESULTS
     # --------------------------------------------------
 
     st.divider()

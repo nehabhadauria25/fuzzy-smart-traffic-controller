@@ -1,8 +1,5 @@
-
-"""
-Traffic Visualization Module
-Person 3 Contribution
-"""
+import matplotlib
+matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 import os
@@ -38,9 +35,7 @@ def create_comparison_graph(fixed_metrics, fuzzy_metrics):
         )
 
         axes[i].set_title(metrics[i])
-
         axes[i].set_ylabel("Value")
-
         axes[i].grid(axis="y", alpha=0.3)
 
     plt.suptitle(
@@ -58,23 +53,21 @@ def create_comparison_graph(fixed_metrics, fuzzy_metrics):
         bbox_inches="tight"
     )
 
-    plt.show()
+    plt.close(fig)
 
 
 def create_waiting_time_graph(fixed_waiting, fuzzy_waiting):
 
-    plt.figure(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
 
-    plt.bar(
+    ax.bar(
         ["Fixed Time", "Fuzzy Logic"],
         [fixed_waiting, fuzzy_waiting]
     )
 
-    plt.title("Average Traffic Waiting Time")
-
-    plt.ylabel("Waiting Time (seconds)")
-
-    plt.grid(axis="y", alpha=0.3)
+    ax.set_title("Average Traffic Waiting Time")
+    ax.set_ylabel("Waiting Time (seconds)")
+    ax.grid(axis="y", alpha=0.3)
 
     os.makedirs("results", exist_ok=True)
 
@@ -84,23 +77,21 @@ def create_waiting_time_graph(fixed_waiting, fuzzy_waiting):
         bbox_inches="tight"
     )
 
-    plt.show()
+    plt.close(fig)
 
 
 def create_queue_graph(fixed_queue, fuzzy_queue):
 
-    plt.figure(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
 
-    plt.bar(
+    ax.bar(
         ["Fixed Time", "Fuzzy Logic"],
         [fixed_queue, fuzzy_queue]
     )
 
-    plt.title("Average Traffic Queue Length")
-
-    plt.ylabel("Number of Vehicles")
-
-    plt.grid(axis="y", alpha=0.3)
+    ax.set_title("Average Traffic Queue Length")
+    ax.set_ylabel("Number of Vehicles")
+    ax.grid(axis="y", alpha=0.3)
 
     os.makedirs("results", exist_ok=True)
 
@@ -110,5 +101,4 @@ def create_queue_graph(fixed_queue, fuzzy_queue):
         bbox_inches="tight"
     )
 
-    plt.show()
-
+    plt.close(fig)
