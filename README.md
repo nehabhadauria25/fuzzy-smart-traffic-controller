@@ -11,16 +11,16 @@ The main objective is to demonstrate how intelligent, adaptive traffic signal co
 
 ---
 
-## 🌐 Live Demo
+##  Live Demo
 
-🚀 [Fuzzy Logic-Based Smart Traffic Controller – Live Application](https://fuzzy-smart-traffic-controller.streamlit.app/)
+ [Fuzzy Logic-Based Smart Traffic Controller – Live Application](https://fuzzy-smart-traffic-controller.streamlit.app/)
 
-## 💻 GitHub Repository
+##  GitHub Repository
 
 [View Source Code on GitHub](https://github.com/nehabhadauria25/fuzzy-smart-traffic-controller)
 ---
 
-## 📌 Project Objectives
+## Project Objectives
 
 - Simulate traffic conditions at a two-direction intersection.
 - Implement a traditional fixed-time traffic controller.
@@ -31,7 +31,7 @@ The main objective is to demonstrate how intelligent, adaptive traffic signal co
 
 ---
 
-## ✨ Features
+## Features
 
 ### 1. Traffic Simulation
 
@@ -83,7 +83,7 @@ The application generates graphs to compare:
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Technology   | Purpose                                             |
 | ------------ | --------------------------------------------------- |
@@ -97,7 +97,7 @@ The application generates graphs to compare:
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```
 fuzzy-smart-traffic-controller/
 │
@@ -122,7 +122,7 @@ fuzzy-smart-traffic-controller/
 
 ---
 
-## ⚙️ Installation and Setup
+##  Installation and Setup
 
 ### Step 1: Clone the Repository
 ```
@@ -158,7 +158,7 @@ The application will open in your browser.
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 The project uses Pytest for automated testing.
 
@@ -184,7 +184,7 @@ The project currently contains six automated tests:
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - Support multiple traffic intersections.
 - Introduce pedestrian movement and crossing signals.
@@ -195,10 +195,9 @@ The project currently contains six automated tests:
 
 ---
 
-## 🎯 Conclusion
+## Conclusion
 
 The Fuzzy Logic-Based Smart Traffic Controller demonstrates how fuzzy logic can be applied to traffic signal management.
 
 By comparing fixed-time and adaptive traffic control under the same simulated traffic conditions, the project provides a practical demonstration of intelligent decision-making and performance evaluation.
 
-**Note:** This project is an educational simulation and is not intended for controlling real-world traffic signals.
